@@ -25,7 +25,7 @@ for brand_index in details:
                 x2[device_key['name']] = device_key['value'] 
 
 sorted_results = sorted(x2.items(), lambda x, y: cmp(x[1], y[1]), reverse=True) 
-top_n = 50
+top_n = 300
 result_file = codecs.open('devices.log', 'w', 'utf-8')
 q_engine = HuiHui()
 
@@ -39,7 +39,7 @@ for item in sorted_results:
         if price != None:
             result_file.write(u"\t%s\t%s" % (price, title))
             print "Top %s %s(%s%%): %s %s" % (i+1, item[0], item[1], price, title)
-            total_price += int(price)
+            total_price += float(price)
     i += 1
     result_file.write('\n')
 result_file.close()
