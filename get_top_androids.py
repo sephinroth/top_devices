@@ -2,8 +2,9 @@
 #!/usr/bin/python
 
 import codecs
-import jieba
+#import jieba
 import json
+import random
 import string
 import time
 import urllib2
@@ -25,8 +26,8 @@ for brand_index in details:
                 x2[device_key['name']] = device_key['value'] 
 
 sorted_results = sorted(x2.items(), lambda x, y: cmp(x[1], y[1]), reverse=True) 
-top_n = 200
-min_price = 99 # 最低价格
+top_n = 100
+min_price = 199 # 最低价格
 
 result_file = codecs.open('devices.log', 'w', 'utf-8')
 q_engine = HuiHui()
@@ -34,9 +35,10 @@ q_engine = HuiHui()
 i = 0
 total_price = 0
 for item in sorted_results:
+    print u"%s\t%s" % (item[0], item[1])
     result_file.write(u"%s\t%s" % (item[0], item[1]))
     if i < top_n:
-        time.sleep(3)
+        time.sleep(random.randint(3, 15))
         price, title = q_engine.pquery(string.split(item[0], ' '))
         if price != None and float(price) > min_price:
             #result_file.write(u"\t%s\t%s" % (price, title))
