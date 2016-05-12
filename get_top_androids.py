@@ -45,6 +45,8 @@ for item in sorted_results:
             result_file.write(u"\t%s\t%s" % (price, 'http://www.huihui.cn/search?q=' + "+".join(string.split(item[0], ' '))))
             print "Top %s %s(%s%%): %s %s" % (i+1, item[0], item[1], price, title)
             total_price += float(price)
+        else:
+            print 'Something was wrong with query.'
     i += 1
     result_file.write('\n')
 result_file.close()

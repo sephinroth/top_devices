@@ -11,14 +11,18 @@ class HuiHui:
 
         tree = etree.HTML(content.read())
         if len(tree.xpath("//div[@id='scRecommend']/div/div[@class='noresult']")) != 0:
+            print 'NO result is found'
             return None, None
 
         root = tree.xpath("//div[@id='scList']//ul[@class='clearfix']/li")
         if len(root) == 0:
+            print 'result list is empty'
             return None, None
         else:
             root = root[0]
         title = root.xpath("//h2/a")[0].attrib['title']
         price = root.xpath("//div[@class='scrow-price']//em")[0].text
+        if None in (title, price):
+            print content
         return price, title
 
